@@ -2,4 +2,10 @@
     <string name="app_name">wordify</string>
     <string name="icon">icon</string>
     <string name="dictionary_made_easy">dictionary made easy</string>
+    <string name="add_a_new_word">add a new word</string>
+    <string name="words">words</string>
+    <string name="favorites">favorites</string>
+    <string name="archives">archives</string>
+    <string name="about">about</string>
+    <string name="_2021_wordify">© 2021 wordify</string>
 </resources>

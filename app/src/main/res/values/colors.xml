@@ -17,4 +17,6 @@
     <color name="darkBlue">#0056B2</color>
     <color name="lightBlue">#00B6FF</color>
     <color name="splashBackground">#141727</color>
+    <color name="wordsContainerColor">#6BA7FF</color>
+    <color name="languageColor">#6BA7FF</color>
 </resources>
