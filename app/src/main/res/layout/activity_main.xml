@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/whiteBackground"
     android:orientation="vertical"
     android:padding="24dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/add_new_word_gradient">
+        android:background="@drawable/add_new_word_gradient"
+        >
 
         <TextView
             android:layout_width="0dp"
@@ -50,7 +52,8 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="8dp"
                 android:contentDescription="@string/words"
-                android:src="@drawable/stacked_papers" />
+                android:src="@drawable/stacked_papers"
+                tools:ignore="ImageContrastCheck" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -133,7 +136,8 @@
             android:layout_marginStart="10dp"
             android:layout_weight="1"
             android:background="@drawable/about_container"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:onClick="openAboutActivity">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -158,14 +162,14 @@
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:gravity="bottom">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/_2021_wordify"
-            android:textColor="@color/white"
-            android:textAlignment="center"
             android:background="@drawable/footer_container"
-            />
+            android:text="@string/_2021_wordify"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
     </LinearLayout>
 
 </LinearLayout>

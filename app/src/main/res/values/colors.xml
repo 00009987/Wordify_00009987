@@ -19,4 +19,5 @@
     <color name="splashBackground">#141727</color>
     <color name="wordsContainerColor">#6BA7FF</color>
     <color name="languageColor">#6BA7FF</color>
+    <color name="whiteBackground">#F8F8F8</color>
 </resources>
