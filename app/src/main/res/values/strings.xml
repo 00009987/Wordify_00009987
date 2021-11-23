@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">Wordify_00009987</string>
+    <string name="app_name">wordify</string>
+    <string name="icon">icon</string>
+    <string name="dictionary_made_easy">dictionary made easy</string>
 </resources>
