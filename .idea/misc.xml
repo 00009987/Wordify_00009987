@@ -8,14 +8,18 @@
         <entry key="..\:/Users/HP/Desktop/Wordify_00009987/app/src/main/res/drawable/add_new_word_gradient.xml" value="0.2703125" />
         <entry key="..\:/Users/HP/Desktop/Wordify_00009987/app/src/main/res/drawable/archives_container.xml" value="0.2703125" />
         <entry key="..\:/Users/HP/Desktop/Wordify_00009987/app/src/main/res/drawable/card_container.xml" value="0.2703125" />
+        <entry key="..\:/Users/HP/Desktop/Wordify_00009987/app/src/main/res/drawable/checkbox_selector.xml" value="0.2703125" />
         <entry key="..\:/Users/HP/Desktop/Wordify_00009987/app/src/main/res/drawable/favorites_container.xml" value="0.2703125" />
         <entry key="..\:/Users/HP/Desktop/Wordify_00009987/app/src/main/res/drawable/footer_container.xml" value="0.2703125" />
+        <entry key="..\:/Users/HP/Desktop/Wordify_00009987/app/src/main/res/drawable/form_btn_container.xml" value="0.2703125" />
         <entry key="..\:/Users/HP/Desktop/Wordify_00009987/app/src/main/res/drawable/words_container.xml" value="0.2703125" />
         <entry key="..\:/Users/HP/Desktop/Wordify_00009987/app/src/main/res/font/font.xml" value="0.284375" />
         <entry key="..\:/Users/HP/Desktop/Wordify_00009987/app/src/main/res/font/poppins_font.xml" value="0.284375" />
         <entry key="..\:/Users/HP/Desktop/Wordify_00009987/app/src/main/res/layout/activity_about.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/HP/Desktop/Wordify_00009987/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/HP/Desktop/Wordify_00009987/app/src/main/res/layout/activity_new_word.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/HP/Desktop/Wordify_00009987/app/src/main/res/layout/activity_splash.xml" value="0.264" />
+        <entry key="..\:/Users/HP/Desktop/Wordify_00009987/app/src/main/res/layout/language_option_layout.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>

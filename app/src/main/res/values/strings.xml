@@ -10,4 +10,14 @@
     <string name="_2021_wordify">© 2021 wordify</string>
     <string name="about_text">wordify — a place where you can create, read, delete or update new words from several languages and save translations in english.</string>
     <string name="about_disclamer_text">this app was created by 00009987 to fulfill mobile applications development module’s requirements, and does not represent an actual company or service.</string>
+    <string name="original">original</string>
+    <string name="type_your_word">type your word</string>
+    <string name="translation">translation</string>
+    <string name="type_its_translation">type its translation</string>
+    <string name="definition">definition</string>
+    <string name="type_its_definition">type its definition</string>
+    <string name="spanish">spanish</string>
+    <string name="language">language</string>
+    <string name="favorite">favorite</string>
+    <string name="create">create</string>
 </resources>

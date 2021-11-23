@@ -10,15 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Wordify_00009987">
         <activity
+            android:name=".NewWordActivity"
+            android:exported="true"
+            android:label="new word"/>
+        <activity
             android:name=".AboutActivity"
             android:exported="true"
-            android:label="@string/about"/>
+            android:label="@string/about" />
         <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
