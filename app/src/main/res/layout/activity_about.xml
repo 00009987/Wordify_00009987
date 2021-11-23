@@ -2,34 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/whiteBackground"
-    android:padding="24dp">
+    android:background="@color/whiteBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/card_container"
+        android:elevation="4dp"
         android:orientation="vertical"
+        android:layout_margin="20dp"
+        android:padding="16dp"
         >
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/about_text"
-            android:textColor="#4A4646"
-            android:textSize="16sp"
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/poppins_regular"
-            />
+            android:text="@string/about_text"
+            android:textColor="#4A4646"
+            android:textSize="14sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fontFamily="@font/poppins_light"
             android:text="@string/about_disclamer_text"
             android:textColor="#ACACAC"
-            android:textSize="16sp"
-            android:fontFamily="@font/poppins_light"
-            />
+            android:textSize="12sp" />
 
 
     </LinearLayout>
