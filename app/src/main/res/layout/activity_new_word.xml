@@ -29,6 +29,7 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:id="@+id/originalWord"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -56,6 +57,7 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:id="@+id/translation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -83,6 +85,7 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:id="@+id/definition"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_marginStart="16dp"
@@ -121,7 +124,8 @@
                 android:elevation="2dp"
                 android:fontFamily="@font/poppins_regular"
                 android:spinnerMode="dropdown"
-                android:textColor="@color/primaryColor" />
+                android:textColor="@color/primaryColor"
+                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -139,13 +143,15 @@
                     android:textSize="16sp" />
 
                 <CheckBox
+                    android:id="@+id/isFavorite"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:buttonTint="@color/primaryColor"/>
+                    android:buttonTint="@color/primaryColor" />
             </LinearLayout>
 
             <Button
+                android:id="@+id/submitBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -158,7 +164,6 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
-
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
