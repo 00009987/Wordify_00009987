@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.UserDictionary;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -26,6 +27,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void openNewWordActivity(View view) {
         Intent i = new Intent(this, NewWordActivity.class);
+        startActivity(i);
+    }
+
+    public void openWordsActivity(View view) {
+        Intent i = new Intent(this, WordsListActivity.class);
         startActivity(i);
     }
 }

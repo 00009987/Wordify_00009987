@@ -40,6 +40,7 @@
         android:layout_marginTop="16dp">
 
         <LinearLayout
+            android:onClick="openWordsActivity"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"

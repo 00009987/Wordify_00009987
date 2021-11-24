@@ -25,6 +25,7 @@ public class NewWordActivity extends AppCompatActivity {
 
         generateSpinnerOptions();
 
+        // add click listener to the form button
         Button submitBtn = findViewById(R.id.submitBtn);
         submitBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
