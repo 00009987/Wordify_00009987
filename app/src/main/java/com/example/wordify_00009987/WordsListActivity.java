@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class WordsListActivity extends AppCompatActivity {
@@ -20,9 +21,11 @@ public class WordsListActivity extends AppCompatActivity {
         SQLiteDatabase db = dbManager.getReadableDatabase();
 
         // get all the words from db
-        Cursor result = db.query("dictionary", null, null, null, null, null, null);
+        Cursor dictionary = db.query("dictionary", null, null, null, null, null, null);
 
-
-        Log.d("wordtest", String.valueOf(result.getCount()));
+        // display words in listview
+        DictionaryAdapter dcAdapter = new DictionaryAdapter(this, dictionary);
+        ListView listView = findViewById(R.id.words_list);
+        listView.setAdapter(dcAdapter);
     }
 }

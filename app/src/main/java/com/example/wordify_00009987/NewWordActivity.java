@@ -57,7 +57,7 @@ public class NewWordActivity extends AppCompatActivity {
 
                     // check if word was added to the db
                     if (id > 0) {
-                        Toast.makeText(NewWordActivity.this, "Your word was successfully added", Toast.LENGTH_LONG).show();
+                        Toast.makeText(NewWordActivity.this, "Your word was successfully created", Toast.LENGTH_LONG).show();
                         finish();
                     } else {
                         Toast.makeText(NewWordActivity.this, "Something went wrong, please try again", Toast.LENGTH_SHORT).show();
