@@ -10,16 +10,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class DictionaryAdapter extends BaseAdapter {
     private final Cursor dictionary;
     private final Context context;
     private final SQLiteDatabase db;
+    private final String type;
 
-    public DictionaryAdapter(Context context, Cursor dictionary) {
+    public DictionaryAdapter(Context context, Cursor dictionary, String type) {
         this.dictionary = dictionary;
         this.context = context;
+        this.type = type;
 
         DictionaryDbManager dbManager = new DictionaryDbManager(context);
         this.db = dbManager.getWritableDatabase();
@@ -48,7 +51,7 @@ public class DictionaryAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(context);
-            convertView = inflater.inflate(R.layout.word_item, null);
+            convertView = inflater.inflate(R.layout.activity_word_item, null);
         }
 
         // get word properties
@@ -67,21 +70,28 @@ public class DictionaryAdapter extends BaseAdapter {
         TextView languageText = convertView.findViewById(R.id.language_text);
         languageText.setText(language);
 
-        // attaching event listener on the word container
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // setting the corresponding word properties into intent
-                Intent i = new Intent(context, DetailedWordActivity.class);
-                i.putExtra("word_id", getItemId(position));
-                i.putExtra("originalWord", originalWord);
-                i.putExtra("translation", translation);
-                i.putExtra("language", language);
-                i.putExtra("definition", definition);
-                i.putExtra("isFavorite", isFavorite);
-                context.startActivity(i);
-            }
-        });
+        ImageView icon = convertView.findViewById(R.id.word_icon);
+
+        // set icon according to the type
+        if (type.equals("favorites"))
+            icon.setImageResource(R.drawable.heart_icon_red);
+        else if (type.equals(("archives")))
+            icon.setImageResource(R.drawable.archive_icon_yellow);
+            // attaching event listener on the word container
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // setting the corresponding word properties into intent
+                    Intent i = new Intent(context, DetailedWordActivity.class);
+                    i.putExtra("word_id", getItemId(position));
+                    i.putExtra("originalWord", originalWord);
+                    i.putExtra("translation", translation);
+                    i.putExtra("language", language);
+                    i.putExtra("definition", definition);
+                    i.putExtra("isFavorite", isFavorite);
+                    context.startActivity(i);
+                }
+            });
 
         return convertView;
     }

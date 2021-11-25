@@ -12,8 +12,7 @@
         android:layout_margin="24dp"
         android:background="@drawable/add_new_word_gradient"
         android:elevation="4dp"
-        android:onClick="openNewWordActivity"
-        >
+        android:onClick="openNewWordActivity">
 
         <TextView
             android:layout_width="0dp"
@@ -35,12 +34,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:baselineAligned="false"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp">
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:onClick="openWordsActivity"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
@@ -50,6 +48,7 @@
             android:layout_weight="1"
             android:background="@drawable/words_container"
             android:elevation="8dp"
+            android:onClick="openWordsListActivity"
             android:orientation="vertical">
 
             <ImageView
@@ -74,6 +73,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:onClick="openFavoritesListActivity"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -106,16 +106,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:baselineAligned="false"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp">
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:layout_marginEnd="10dp"
             android:layout_marginStart="24dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="16dp"
             android:layout_weight="1"
             android:background="@drawable/archives_container"
@@ -145,8 +145,8 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
             android:layout_marginStart="10dp"
+            android:layout_marginEnd="24dp"
             android:layout_marginBottom="16dp"
             android:layout_weight="1"
             android:background="@drawable/about_container"

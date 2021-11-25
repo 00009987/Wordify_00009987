@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="10dp"
+        android:background="@drawable/card_container"
+        android:elevation="2dp"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/original_word_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/word_translation"
+                android:textColor="@color/primaryColor"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/language_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_light"
+                android:text="@string/language"
+                android:textColor="@color/secondaryColor"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/word_icon"
+            android:layout_width="47dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:contentDescription="@string/icon"
+            android:layout_weight="1"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

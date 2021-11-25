@@ -30,8 +30,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void openWordsActivity(View view) {
+    public void openWordsListActivity(View view) {
         Intent i = new Intent(this, WordsListActivity.class);
+        i.putExtra("type", "words");
+        startActivity(i);
+    }
+
+    public void openFavoritesListActivity (View view){
+        Intent i = new Intent(this, WordsListActivity.class);
+        i.putExtra("type", "favorites");
         startActivity(i);
     }
 }
