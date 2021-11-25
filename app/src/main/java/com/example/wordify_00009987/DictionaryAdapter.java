@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +58,7 @@ public class DictionaryAdapter extends BaseAdapter {
         String translation = cursor.getString(cursor.getColumnIndex("translation"));
         String language = cursor.getString((cursor.getColumnIndex("language")));
         String definition = cursor.getString(cursor.getColumnIndex("definition"));
-        boolean isFavorite = Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex("isFavorite")));
+        String isFavorite = cursor.getString(cursor.getColumnIndex("isFavorite"));
 
         // set properties to corresponding fields
         TextView originalWordText = convertView.findViewById(R.id.original_word_text);

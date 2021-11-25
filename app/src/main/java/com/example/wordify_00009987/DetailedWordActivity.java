@@ -17,7 +17,7 @@ public class DetailedWordActivity extends AppCompatActivity {
     private String translation;
     private String language;
     private String definition;
-    private boolean isFavorite;
+    private String isFavorite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class DetailedWordActivity extends AppCompatActivity {
         translation = i.getStringExtra("translation");
         language = i.getStringExtra("language");
         definition = i.getStringExtra("definition");
-        isFavorite = i.getBooleanExtra("isFavorite", false);
+        isFavorite = i.getStringExtra("isFavorite");
 
         // set word details
         originalWordText.setText(originalWord + " — " + translation);
