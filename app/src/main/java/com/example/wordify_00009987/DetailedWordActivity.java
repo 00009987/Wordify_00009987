@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DetailedWordActivity extends AppCompatActivity {
     private long wordId;
@@ -59,6 +60,21 @@ public class DetailedWordActivity extends AppCompatActivity {
         i.putExtra("language", language);
         i.putExtra("definition", definition);
         i.putExtra("isFavorite", isFavorite);
+        startActivity(i);
+    }
+
+    public void deleteSelectedWord(View view) {
+        // connect to db
+        DictionaryDbManager dbManager = new DictionaryDbManager(this);
+        SQLiteDatabase db = dbManager.getWritableDatabase();
+
+        // delete the word from db
+        db.delete("dictionary", "_id = ?", new String[]{String.valueOf(wordId)});
+
+        // show success msg & jump to home screen
+        Toast.makeText(this, "the word is successfully deleted", Toast.LENGTH_SHORT).show();
+
+        Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
 }

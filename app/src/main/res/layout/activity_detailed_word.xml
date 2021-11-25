@@ -115,7 +115,8 @@
             android:background="@drawable/delete_container"
             android:elevation="4dp"
             android:gravity="center"
-            android:paddingVertical="16dp">
+            android:paddingVertical="16dp"
+            android:onClick="deleteSelectedWord">
 
             <ImageView
                 android:layout_width="47dp"
