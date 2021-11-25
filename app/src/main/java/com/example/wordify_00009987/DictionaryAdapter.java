@@ -2,6 +2,7 @@ package com.example.wordify_00009987;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
@@ -41,7 +42,7 @@ public class DictionaryAdapter extends BaseAdapter {
         return cursor.getLong(cursor.getColumnIndex("_id"));
     }
 
-    @SuppressLint({"Range", "SetTextI18n"})
+    @SuppressLint({"Range", "SetTextI18n", "InflateParams"})
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
@@ -60,6 +61,16 @@ public class DictionaryAdapter extends BaseAdapter {
         String language = cursor.getString((cursor.getColumnIndex("language")));
         TextView languageText = convertView.findViewById(R.id.language_text);
         languageText.setText(language);
+
+        // attaching event listener on the word container
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, DetailedWordActivity.class);
+                i.putExtra("word_id", getItemId(position));
+                context.startActivity(i);
+            }
+        });
 
         return convertView;
     }

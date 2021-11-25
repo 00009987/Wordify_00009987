@@ -10,9 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Wordify_00009987">
         <activity
+            android:name=".DetailedWordActivity"
+            android:exported="true" />
+        <activity
             android:name=".WordsListActivity"
             android:exported="true"
-            android:label="@string/words"/>
+            android:label="@string/words" />
         <activity
             android:name=".NewWordActivity"
             android:exported="true"
