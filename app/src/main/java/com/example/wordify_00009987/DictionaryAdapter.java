@@ -74,6 +74,7 @@ public class DictionaryAdapter extends BaseAdapter {
                 i.putExtra("word_id", getItemId(position));
                 i.putExtra("originalWord", originalWord);
                 i.putExtra("translation", translation);
+                i.putExtra("language", language);
                 i.putExtra("definition", definition);
                 context.startActivity(i);
             }

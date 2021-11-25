@@ -21,4 +21,5 @@
     <string name="favorite">favorite</string>
     <string name="create">create</string>
     <string name="word_translation">word - translation</string>
+    <string name="edit_the_word">edit the word</string>
 </resources>

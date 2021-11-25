@@ -28,7 +28,7 @@ public class DetailedWordActivity extends AppCompatActivity {
         DictionaryDbManager dbManager = new DictionaryDbManager(this);
         SQLiteDatabase db = dbManager.getReadableDatabase();
         Cursor word = db.query("dictionary", null, "_id = ?", new String[]{String.valueOf(wordId)}, null, null, null, null);
-        
+
         // get the word details from the intent
         Intent i = getIntent();
         wordId = i.getLongExtra("word_id", 0);

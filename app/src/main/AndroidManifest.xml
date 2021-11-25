@@ -11,7 +11,8 @@
         android:theme="@style/Theme.Wordify_00009987">
         <activity
             android:name=".DetailedWordActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:label="word details"/>
         <activity
             android:name=".WordsListActivity"
             android:exported="true"
