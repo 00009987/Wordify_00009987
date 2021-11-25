@@ -50,15 +50,18 @@ public class DictionaryAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.word_item, null);
         }
 
-        // get word properties and set them corresponding fields
+        // get word properties
         Cursor cursor = (Cursor) getItem(position);
 
         String originalWord = cursor.getString(cursor.getColumnIndex("originalWord"));
         String translation = cursor.getString(cursor.getColumnIndex("translation"));
+        String language = cursor.getString((cursor.getColumnIndex("language")));
+        String definition = cursor.getString(cursor.getColumnIndex("definition"));
+
+        // set properties to corresponding fields
         TextView originalWordText = convertView.findViewById(R.id.original_word_text);
         originalWordText.setText(originalWord + " — " + translation);
 
-        String language = cursor.getString((cursor.getColumnIndex("language")));
         TextView languageText = convertView.findViewById(R.id.language_text);
         languageText.setText(language);
 
@@ -66,8 +69,12 @@ public class DictionaryAdapter extends BaseAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // setting the corresponding word properties into intent
                 Intent i = new Intent(context, DetailedWordActivity.class);
                 i.putExtra("word_id", getItemId(position));
+                i.putExtra("originalWord", originalWord);
+                i.putExtra("translation", translation);
+                i.putExtra("definition", definition);
                 context.startActivity(i);
             }
         });
