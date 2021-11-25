@@ -8,9 +8,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="16dp"
-        android:layout_marginHorizontal="8dp"
         android:background="@drawable/card_container"
         android:elevation="4dp"
         android:orientation="vertical"
@@ -51,6 +51,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/word_edit_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="8dp"
@@ -58,8 +59,9 @@
             android:layout_weight="1"
             android:background="@drawable/words_container"
             android:elevation="4dp"
-            android:padding="16dp"
-            android:gravity="center">
+            android:gravity="center"
+            android:onClick="openEditWordActivity"
+            android:padding="16dp">
 
             <ImageView
                 android:layout_width="47dp"
@@ -76,8 +78,8 @@
             android:layout_weight="1"
             android:background="@drawable/favorites_container"
             android:elevation="4dp"
-            android:padding="16dp"
-            android:gravity="center">
+            android:gravity="center"
+            android:padding="16dp">
 
             <ImageView
                 android:layout_width="47dp"
@@ -94,8 +96,8 @@
             android:layout_weight="1"
             android:background="@drawable/archives_container"
             android:elevation="4dp"
-            android:padding="16dp"
-            android:gravity="center">
+            android:gravity="center"
+            android:padding="16dp">
 
             <ImageView
                 android:layout_width="47dp"
@@ -112,8 +114,8 @@
             android:layout_weight="1"
             android:background="@drawable/delete_container"
             android:elevation="4dp"
-            android:paddingVertical="16dp"
-            android:gravity="center">
+            android:gravity="center"
+            android:paddingVertical="16dp">
 
             <ImageView
                 android:layout_width="47dp"

@@ -57,6 +57,7 @@ public class DictionaryAdapter extends BaseAdapter {
         String translation = cursor.getString(cursor.getColumnIndex("translation"));
         String language = cursor.getString((cursor.getColumnIndex("language")));
         String definition = cursor.getString(cursor.getColumnIndex("definition"));
+        boolean isFavorite = Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex("isFavorite")));
 
         // set properties to corresponding fields
         TextView originalWordText = convertView.findViewById(R.id.original_word_text);
@@ -76,6 +77,7 @@ public class DictionaryAdapter extends BaseAdapter {
                 i.putExtra("translation", translation);
                 i.putExtra("language", language);
                 i.putExtra("definition", definition);
+                i.putExtra("isFavorite", isFavorite);
                 context.startActivity(i);
             }
         });

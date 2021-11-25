@@ -2,6 +2,7 @@ package com.example.wordify_00009987;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -17,8 +18,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class NewWordActivity extends AppCompatActivity {
+import java.util.Arrays;
 
+public class NewWordActivity extends AppCompatActivity {
+    private final String[] options = new String[]{"spanish", "japanese", "german", "russian"};
+
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,16 +31,46 @@ public class NewWordActivity extends AppCompatActivity {
 
         generateSpinnerOptions();
 
-        // add click listener to the form button
+        // get the word id from intent
+        Intent i = getIntent();
+        long wordId = i.getLongExtra("word_id", 0);
+
+        // get form elements
         Button submitBtn = findViewById(R.id.submitBtn);
+        EditText originalWordText = findViewById(R.id.originalWord);
+        EditText definitionText = findViewById(R.id.definition);
+        EditText translationText = findViewById(R.id.translation);
+        Spinner languageSpinner = findViewById(R.id.language_spinner);
+        CheckBox isFavoriteCheckbox = findViewById(R.id.isFavorite);
+
+        // check if the form should be in edit mode
+        if (wordId != 0) {
+            // get word properties from intent
+            String originalWord = i.getStringExtra("originalWord");
+            String translation = i.getStringExtra("translation");
+            String definition = i.getStringExtra("definition");
+            boolean isFavorite = i.getBooleanExtra("isFavorite", false);
+            int languageIndex = Arrays.asList(options).indexOf(i.getStringExtra("language"));
+
+            // set values on corresponding elements
+            originalWordText.setText(originalWord);
+            translationText.setText(translation);
+            definitionText.setText(definition);
+            languageSpinner.setSelection(languageIndex);
+            isFavoriteCheckbox.setChecked(isFavorite);
+            submitBtn.setText("save");
+            setTitle("edit the word");
+        }
+
+        // add click listener to the form button
         submitBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 // get user inputs from the edit texts
-                String originalWord = ((EditText) findViewById(R.id.originalWord)).getText().toString();
-                String translation = ((EditText) findViewById(R.id.translation)).getText().toString();
-                String definition = ((EditText) findViewById(R.id.definition)).getText().toString();
-                String language = ((Spinner) findViewById(R.id.language_spinner)).getSelectedItem().toString();
-                Boolean isFavorite = ((CheckBox) findViewById(R.id.isFavorite)).isChecked();
+                String originalWord = originalWordText.getText().toString();
+                String translation = translationText.getText().toString();
+                String definition = definitionText.getText().toString();
+                String language = languageSpinner.getSelectedItem().toString();
+                Boolean isFavorite = isFavoriteCheckbox.isChecked();
 
                 // validate inputs
                 if (originalWord.isEmpty() || translation.isEmpty() || definition.isEmpty())
@@ -54,14 +89,25 @@ public class NewWordActivity extends AppCompatActivity {
                     values.put("isFavorite", isFavorite);
                     values.put("isArchived", false);
 
-                    long id = db.insert("dictionary", null, values);
+                    if (wordId == 0) {
+                        // create a new word
+                        long id = db.insert("dictionary", null, values);
 
-                    // check if word was added to the db
-                    if (id > 0) {
-                        Toast.makeText(NewWordActivity.this, "Your word was successfully created", Toast.LENGTH_LONG).show();
-                        finish();
+                        // check if word was added to the db
+                        if (id > 0) {
+                            Toast.makeText(NewWordActivity.this, "your word is successfully created", Toast.LENGTH_LONG).show();
+                            finish();
+                        } else {
+                            Toast.makeText(NewWordActivity.this, "something went wrong, please try again", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
-                        Toast.makeText(NewWordActivity.this, "Something went wrong, please try again", Toast.LENGTH_SHORT).show();
+                        // update the existing word
+                        db.update("dictionary", values, "_id = ?", new String[]{String.valueOf(wordId)});
+                        Toast.makeText(NewWordActivity.this, "the word is successfully update", Toast.LENGTH_LONG).show();
+
+                        // open main activity
+                        Intent mainActivity = new Intent(NewWordActivity.this, MainActivity.class);
+                        startActivity(mainActivity);
                     }
                 }
             }
@@ -70,10 +116,9 @@ public class NewWordActivity extends AppCompatActivity {
 
     private void generateSpinnerOptions() {
         Spinner dropdown = findViewById(R.id.language_spinner);
-        String[] items = new String[]{"spanish", "japanese", "german", "russian"};
 
         // basic adapter to describe how the items are displayed
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, options);
         dropdown.setAdapter(adapter);
     }
 }
