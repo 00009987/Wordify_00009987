@@ -73,7 +73,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:onClick="openFavoritesListActivity"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -82,6 +81,7 @@
             android:layout_weight="1"
             android:background="@drawable/favorites_container"
             android:elevation="8dp"
+            android:onClick="openFavoritesListActivity"
             android:orientation="vertical">
 
             <ImageView
@@ -120,6 +120,7 @@
             android:layout_weight="1"
             android:background="@drawable/archives_container"
             android:elevation="4dp"
+            android:onClick="openArchivesListActivity"
             android:orientation="vertical">
 
             <ImageView

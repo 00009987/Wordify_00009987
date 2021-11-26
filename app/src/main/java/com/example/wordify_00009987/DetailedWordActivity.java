@@ -20,6 +20,7 @@ public class DetailedWordActivity extends AppCompatActivity {
     private String language;
     private String definition;
     private boolean isFavorite;
+    private boolean isArchived;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,7 @@ public class DetailedWordActivity extends AppCompatActivity {
         language = i.getStringExtra("language");
         definition = i.getStringExtra("definition");
         isFavorite = i.getStringExtra("isFavorite").equalsIgnoreCase("1");
+        isArchived = i.getStringExtra("isArchived").equalsIgnoreCase("1");
 
         // set word details
         originalWordText.setText(originalWord + " — " + translation);
@@ -61,6 +63,7 @@ public class DetailedWordActivity extends AppCompatActivity {
         i.putExtra("language", language);
         i.putExtra("definition", definition);
         i.putExtra("isFavorite", isFavorite);
+        i.putExtra("isArchived", isArchived);
         startActivity(i);
     }
 
@@ -94,7 +97,7 @@ public class DetailedWordActivity extends AppCompatActivity {
         values.put("definition", definition);
         values.put("language", language);
         values.put("isFavorite", isFavorite);
-        values.put("isArchived", false);
+        values.put("isArchived", isArchived);
 
         // update the existing word
         db.update("dictionary", values, "_id = ?", new String[]{String.valueOf(wordId)});
@@ -104,6 +107,37 @@ public class DetailedWordActivity extends AppCompatActivity {
             Toast.makeText(this, "the word is added to favorites", Toast.LENGTH_SHORT).show();
         else
             Toast.makeText(this, "the word is removed from favorites", Toast.LENGTH_SHORT).show();
+
+        // open main activity
+        Intent mainActivity = new Intent(this, MainActivity.class);
+        startActivity(mainActivity);
+    }
+
+    public void changeArchivedStatus(View view) {
+        // connect to db
+        DictionaryDbManager dbManager = new DictionaryDbManager(this);
+        SQLiteDatabase db = dbManager.getWritableDatabase();
+
+        // change archived status
+        isArchived = !isArchived;
+
+        // update word properties in db
+        ContentValues values = new ContentValues();
+        values.put("originalWord", originalWord);
+        values.put("translation", translation);
+        values.put("definition", definition);
+        values.put("language", language);
+        values.put("isFavorite", isFavorite);
+        values.put("isArchived", isArchived);
+
+        // update the existing word
+        db.update("dictionary", values, "_id = ?", new String[]{String.valueOf(wordId)});
+
+        // show msg according to status
+        if (isArchived)
+            Toast.makeText(this, "the word is added to archived list", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(this, "the word is removed from archived list", Toast.LENGTH_SHORT).show();
 
         // open main activity
         Intent mainActivity = new Intent(this, MainActivity.class);

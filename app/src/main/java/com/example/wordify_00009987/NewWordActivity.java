@@ -31,7 +31,7 @@ public class NewWordActivity extends AppCompatActivity {
 
         generateSpinnerOptions();
 
-        // get the word id from intent
+        // get the word id, archived status from intent
         Intent i = getIntent();
         long wordId = i.getLongExtra("word_id", 0);
 
@@ -87,9 +87,11 @@ public class NewWordActivity extends AppCompatActivity {
                     values.put("definition", definition);
                     values.put("language", language);
                     values.put("isFavorite", isFavorite);
-                    values.put("isArchived", false);
 
                     if (wordId == 0) {
+                        // set new word archived status
+                        values.put("isArchived", false);
+
                         // create a new word
                         long id = db.insert("dictionary", null, values);
 
@@ -101,6 +103,9 @@ public class NewWordActivity extends AppCompatActivity {
                             Toast.makeText(NewWordActivity.this, "something went wrong, please try again", Toast.LENGTH_SHORT).show();
                         }
                     } else {
+                        // set existing word archived status
+                        values.put("isArchived", i.getBooleanExtra("isArchived", false));
+
                         // update the existing word
                         db.update("dictionary", values, "_id = ?", new String[]{String.valueOf(wordId)});
                         Toast.makeText(NewWordActivity.this, "the word is successfully updated", Toast.LENGTH_LONG).show();

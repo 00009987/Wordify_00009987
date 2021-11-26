@@ -26,12 +26,20 @@ public class WordsListActivity extends AppCompatActivity {
         String type = i.getStringExtra("type");
 
         if(type.equals("words")) {
+            setTitle("all words");
+
             // get all the words from db
             dictionary = db.query("dictionary", null, null, null, null, null, null);
         }else if (type.equals("favorites")) {
             setTitle("favorites");
+
             // get all favorites
             dictionary = db.query("dictionary", null, "isFavorite = 1", null, null, null, null);
+        }else if (type.equals("archives")){
+            setTitle("archives");
+
+            // get all favorites
+            dictionary = db.query("dictionary", null, "isArchived = 1", null, null, null, null);
         }
 
         // display words in listview

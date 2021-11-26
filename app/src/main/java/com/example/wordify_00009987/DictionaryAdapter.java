@@ -62,6 +62,7 @@ public class DictionaryAdapter extends BaseAdapter {
         String language = cursor.getString((cursor.getColumnIndex("language")));
         String definition = cursor.getString(cursor.getColumnIndex("definition"));
         String isFavorite = cursor.getString(cursor.getColumnIndex("isFavorite"));
+        String isArchived = cursor.getString(cursor.getColumnIndex("isArchived"));
 
         // set properties to corresponding fields
         TextView originalWordText = convertView.findViewById(R.id.original_word_text);
@@ -77,6 +78,7 @@ public class DictionaryAdapter extends BaseAdapter {
             icon.setImageResource(R.drawable.heart_icon_red);
         else if (type.equals(("archives")))
             icon.setImageResource(R.drawable.archive_icon_yellow);
+
             // attaching event listener on the word container
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -89,6 +91,7 @@ public class DictionaryAdapter extends BaseAdapter {
                     i.putExtra("language", language);
                     i.putExtra("definition", definition);
                     i.putExtra("isFavorite", isFavorite);
+                    i.putExtra("isArchived", isArchived);
                     context.startActivity(i);
                 }
             });

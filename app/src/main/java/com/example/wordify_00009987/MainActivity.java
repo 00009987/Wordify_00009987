@@ -36,9 +36,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void openFavoritesListActivity (View view){
+    public void openFavoritesListActivity(View view) {
         Intent i = new Intent(this, WordsListActivity.class);
         i.putExtra("type", "favorites");
+        startActivity(i);
+    }
+
+    public void openArchivesListActivity(View view) {
+        Intent i = new Intent(this, WordsListActivity.class);
+        i.putExtra("type", "archives");
         startActivity(i);
     }
 }
