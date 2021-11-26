@@ -3,6 +3,7 @@ package com.example.wordify_00009987;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -18,7 +19,7 @@ public class DetailedWordActivity extends AppCompatActivity {
     private String translation;
     private String language;
     private String definition;
-    private String isFavorite;
+    private boolean isFavorite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class DetailedWordActivity extends AppCompatActivity {
         translation = i.getStringExtra("translation");
         language = i.getStringExtra("language");
         definition = i.getStringExtra("definition");
-        isFavorite = i.getStringExtra("isFavorite");
+        isFavorite = i.getStringExtra("isFavorite").equalsIgnoreCase("1");
 
         // set word details
         originalWordText.setText(originalWord + " — " + translation);
@@ -76,5 +77,36 @@ public class DetailedWordActivity extends AppCompatActivity {
 
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
+    }
+
+    public void changeFavoriteStatus(View view) {
+        // connect to db
+        DictionaryDbManager dbManager = new DictionaryDbManager(this);
+        SQLiteDatabase db = dbManager.getWritableDatabase();
+
+        // change favorite status
+        isFavorite = !isFavorite;
+
+        // update word properties in db
+        ContentValues values = new ContentValues();
+        values.put("originalWord", originalWord);
+        values.put("translation", translation);
+        values.put("definition", definition);
+        values.put("language", language);
+        values.put("isFavorite", isFavorite);
+        values.put("isArchived", false);
+
+        // update the existing word
+        db.update("dictionary", values, "_id = ?", new String[]{String.valueOf(wordId)});
+
+        // show msg according to status
+        if (isFavorite)
+            Toast.makeText(this, "the word is added to favorites", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(this, "the word is removed from favorites", Toast.LENGTH_SHORT).show();
+
+        // open main activity
+        Intent mainActivity = new Intent(this, MainActivity.class);
+        startActivity(mainActivity);
     }
 }

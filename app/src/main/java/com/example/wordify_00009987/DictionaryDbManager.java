@@ -14,7 +14,7 @@ public class DictionaryDbManager extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE dictionary (_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, originalWord TEXT NOT NULL, translation TEXT NOT NULL, definition TEXT NOT NULL, language TEXT NOT NULL, isFavorite BOOLEAN NOT NULL, isArchived NOT NULL)");
+        db.execSQL("CREATE TABLE dictionary (_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, originalWord TEXT NOT NULL, translation TEXT NOT NULL, definition TEXT NOT NULL, language TEXT NOT NULL, isFavorite BOOLEAN NOT NULL, isArchived BOOLEAN NOT NULL)");
     }
 
     @Override

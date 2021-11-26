@@ -79,6 +79,7 @@
             android:background="@drawable/favorites_container"
             android:elevation="4dp"
             android:gravity="center"
+            android:onClick="changeFavoriteStatus"
             android:padding="16dp">
 
             <ImageView
@@ -115,8 +116,8 @@
             android:background="@drawable/delete_container"
             android:elevation="4dp"
             android:gravity="center"
-            android:paddingVertical="16dp"
-            android:onClick="deleteSelectedWord">
+            android:onClick="deleteSelectedWord"
+            android:paddingVertical="16dp">
 
             <ImageView
                 android:layout_width="47dp"

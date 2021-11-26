@@ -49,7 +49,7 @@ public class NewWordActivity extends AppCompatActivity {
             String originalWord = i.getStringExtra("originalWord");
             String translation = i.getStringExtra("translation");
             String definition = i.getStringExtra("definition");
-            boolean isFavorite = i.getStringExtra("isFavorite").equalsIgnoreCase("1");
+            boolean isFavorite = i.getBooleanExtra("isFavorite", false);
             int languageIndex = Arrays.asList(options).indexOf(i.getStringExtra("language"));
 
             // set values on corresponding elements
