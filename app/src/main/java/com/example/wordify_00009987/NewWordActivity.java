@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -74,7 +75,9 @@ public class NewWordActivity extends AppCompatActivity {
 
                 // validate inputs
                 if (originalWord.isEmpty() || translation.isEmpty() || definition.isEmpty())
-                    Toast.makeText(NewWordActivity.this, "Please fill all the required input fields", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewWordActivity.this, "please, fill all the required input fields", Toast.LENGTH_SHORT).show();
+                else if (TextUtils.isDigitsOnly(originalWord) || TextUtils.isDigitsOnly(translation) || TextUtils.isDigitsOnly(definition))
+                    Toast.makeText(NewWordActivity.this, "please, enter only alphabetical characters", Toast.LENGTH_SHORT).show();
                 else {
                     // connect to db
                     DictionaryDbManager dbManager = new DictionaryDbManager(NewWordActivity.this);
