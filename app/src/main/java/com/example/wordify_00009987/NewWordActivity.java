@@ -126,7 +126,7 @@ public class NewWordActivity extends AppCompatActivity {
         Spinner dropdown = findViewById(R.id.language_spinner);
 
         // basic adapter to describe how the items are displayed
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, options);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_style, options);
         dropdown.setAdapter(adapter);
     }
 }
