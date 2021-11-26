@@ -72,14 +72,18 @@ public class DetailedWordActivity extends AppCompatActivity {
         DictionaryDbManager dbManager = new DictionaryDbManager(this);
         SQLiteDatabase db = dbManager.getWritableDatabase();
 
-        // delete the word from db
-        db.delete("dictionary", "_id = ?", new String[]{String.valueOf(wordId)});
+        if(isFavorite)
+            Toast.makeText(this, "favorite word cannot be deleted", Toast.LENGTH_LONG).show();
+            else{
+            // delete the word from db
+            db.delete("dictionary", "_id = ?", new String[]{String.valueOf(wordId)});
 
-        // show success msg & jump to home screen
-        Toast.makeText(this, "the word is successfully deleted", Toast.LENGTH_SHORT).show();
+            // show success msg & jump to home screen
+            Toast.makeText(this, "the word is successfully deleted", Toast.LENGTH_SHORT).show();
 
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+        }
     }
 
     public void changeFavoriteStatus(View view) {
