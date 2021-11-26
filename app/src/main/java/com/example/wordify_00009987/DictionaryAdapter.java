@@ -79,22 +79,22 @@ public class DictionaryAdapter extends BaseAdapter {
         else if (type.equals(("archives")))
             icon.setImageResource(R.drawable.archive_icon_yellow);
 
-            // attaching event listener on the word container
-            convertView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // setting the corresponding word properties into intent
-                    Intent i = new Intent(context, DetailedWordActivity.class);
-                    i.putExtra("word_id", getItemId(position));
-                    i.putExtra("originalWord", originalWord);
-                    i.putExtra("translation", translation);
-                    i.putExtra("language", language);
-                    i.putExtra("definition", definition);
-                    i.putExtra("isFavorite", isFavorite);
-                    i.putExtra("isArchived", isArchived);
-                    context.startActivity(i);
-                }
-            });
+        // attaching event listener on the word container
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // setting the corresponding word properties into intent
+                Intent i = new Intent(context, DetailedWordActivity.class);
+                i.putExtra("word_id", getItemId(position));
+                i.putExtra("originalWord", originalWord);
+                i.putExtra("translation", translation);
+                i.putExtra("language", language);
+                i.putExtra("definition", definition);
+                i.putExtra("isFavorite", isFavorite);
+                i.putExtra("isArchived", isArchived);
+                context.startActivity(i);
+            }
+        });
 
         return convertView;
     }

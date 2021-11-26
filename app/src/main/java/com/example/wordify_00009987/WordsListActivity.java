@@ -25,17 +25,17 @@ public class WordsListActivity extends AppCompatActivity {
         Intent i = getIntent();
         String type = i.getStringExtra("type");
 
-        if(type.equals("words")) {
+        if (type.equals("words")) {
             setTitle("all words");
 
             // get all the words from db
             dictionary = db.query("dictionary", null, null, null, null, null, null);
-        }else if (type.equals("favorites")) {
+        } else if (type.equals("favorites")) {
             setTitle("favorites");
 
             // get all favorites
             dictionary = db.query("dictionary", null, "isFavorite = 1", null, null, null, null);
-        }else if (type.equals("archives")){
+        } else if (type.equals("archives")) {
             setTitle("archives");
 
             // get all favorites

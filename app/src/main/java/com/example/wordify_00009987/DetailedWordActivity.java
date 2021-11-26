@@ -87,30 +87,34 @@ public class DetailedWordActivity extends AppCompatActivity {
         DictionaryDbManager dbManager = new DictionaryDbManager(this);
         SQLiteDatabase db = dbManager.getWritableDatabase();
 
-        // change favorite status
-        isFavorite = !isFavorite;
+        if (isArchived) {
+            Toast.makeText(this, "archived word cannot be added to favorites", Toast.LENGTH_SHORT).show();
+        } else {
+            // change favorite status
+            isFavorite = !isFavorite;
 
-        // update word properties in db
-        ContentValues values = new ContentValues();
-        values.put("originalWord", originalWord);
-        values.put("translation", translation);
-        values.put("definition", definition);
-        values.put("language", language);
-        values.put("isFavorite", isFavorite);
-        values.put("isArchived", isArchived);
+            // update word properties in db
+            ContentValues values = new ContentValues();
+            values.put("originalWord", originalWord);
+            values.put("translation", translation);
+            values.put("definition", definition);
+            values.put("language", language);
+            values.put("isFavorite", isFavorite);
+            values.put("isArchived", isArchived);
 
-        // update the existing word
-        db.update("dictionary", values, "_id = ?", new String[]{String.valueOf(wordId)});
+            // update the existing word
+            db.update("dictionary", values, "_id = ?", new String[]{String.valueOf(wordId)});
 
-        // show msg according to status
-        if (isFavorite)
-            Toast.makeText(this, "the word is added to favorites", Toast.LENGTH_SHORT).show();
-        else
-            Toast.makeText(this, "the word is removed from favorites", Toast.LENGTH_SHORT).show();
+            // show msg according to status
+            if (isFavorite)
+                Toast.makeText(this, "the word is added to favorites", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(this, "the word is removed from favorites", Toast.LENGTH_SHORT).show();
 
-        // open main activity
-        Intent mainActivity = new Intent(this, MainActivity.class);
-        startActivity(mainActivity);
+            // open main activity
+            Intent mainActivity = new Intent(this, MainActivity.class);
+            startActivity(mainActivity);
+        }
     }
 
     public void changeArchivedStatus(View view) {
@@ -118,29 +122,33 @@ public class DetailedWordActivity extends AppCompatActivity {
         DictionaryDbManager dbManager = new DictionaryDbManager(this);
         SQLiteDatabase db = dbManager.getWritableDatabase();
 
-        // change archived status
-        isArchived = !isArchived;
+        if (isFavorite)
+            Toast.makeText(this, "favorite word cannot be added to archives", Toast.LENGTH_SHORT).show();
+        else {
+            // change archived status
+            isArchived = !isArchived;
 
-        // update word properties in db
-        ContentValues values = new ContentValues();
-        values.put("originalWord", originalWord);
-        values.put("translation", translation);
-        values.put("definition", definition);
-        values.put("language", language);
-        values.put("isFavorite", isFavorite);
-        values.put("isArchived", isArchived);
+            // update word properties in db
+            ContentValues values = new ContentValues();
+            values.put("originalWord", originalWord);
+            values.put("translation", translation);
+            values.put("definition", definition);
+            values.put("language", language);
+            values.put("isFavorite", isFavorite);
+            values.put("isArchived", isArchived);
 
-        // update the existing word
-        db.update("dictionary", values, "_id = ?", new String[]{String.valueOf(wordId)});
+            // update the existing word
+            db.update("dictionary", values, "_id = ?", new String[]{String.valueOf(wordId)});
 
-        // show msg according to status
-        if (isArchived)
-            Toast.makeText(this, "the word is added to archived list", Toast.LENGTH_SHORT).show();
-        else
-            Toast.makeText(this, "the word is removed from archived list", Toast.LENGTH_SHORT).show();
+            // show msg according to status
+            if (isArchived)
+                Toast.makeText(this, "the word is added to archives", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(this, "the word is removed from archives", Toast.LENGTH_SHORT).show();
 
-        // open main activity
-        Intent mainActivity = new Intent(this, MainActivity.class);
-        startActivity(mainActivity);
+            // open main activity
+            Intent mainActivity = new Intent(this, MainActivity.class);
+            startActivity(mainActivity);
+        }
     }
 }
