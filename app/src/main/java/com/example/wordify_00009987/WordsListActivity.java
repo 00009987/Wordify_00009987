@@ -76,15 +76,21 @@ public class WordsListActivity extends AppCompatActivity {
         // get filtering word
         Spinner filterSpinner = findViewById(R.id.filter_spinner);
         String selectedLanguage = filterSpinner.getSelectedItem().toString();
+        Cursor filteredWords = null;
 
-        // get filtered words from db
-        Cursor filteredWords = db.query("dictionary", null, "language = ?", new String[]{selectedLanguage}, null, null, null, null);
+        // get filtered words from db according to the type
+        if (type.equals("favorites"))
+            filteredWords = db.query("dictionary", null, "language = ? and isFavorite = 1", new String[]{selectedLanguage}, null, null, null, null);
+        else if (type.equals("archives"))
+            filteredWords = db.query("dictionary", null, "language = ? and isArchived = 1", new String[]{selectedLanguage}, null, null, null, null);
+        else
+            filteredWords = db.query("dictionary", null, "language = ?", new String[]{selectedLanguage}, null, null, null, null);
 
         // show user alert msg when there are no words of selected language
         TextView filterAlert = findViewById(R.id.filter_alert_text);
 
-        if(filteredWords.getCount() == 0) {
-            filterAlert.setText("you don't have any " + selectedLanguage + " words yet");
+        if (filteredWords.getCount() == 0) {
+            filterAlert.setText("no words found in " + selectedLanguage + " to filter");
         } else {
             filterAlert.setText("");
         }
