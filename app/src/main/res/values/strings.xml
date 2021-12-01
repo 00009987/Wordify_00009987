@@ -22,4 +22,6 @@
     <string name="create">create</string>
     <string name="word_translation">word - translation</string>
     <string name="edit_the_word">edit the word</string>
+    <string name="filter_by_language">filter by language</string>
+    <string name="filter">filter</string>
 </resources>
