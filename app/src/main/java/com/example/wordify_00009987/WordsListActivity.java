@@ -19,6 +19,7 @@ public class WordsListActivity extends AppCompatActivity {
     private final String[] options = new String[]{"spanish", "japanese", "german", "russian"};
     private SQLiteDatabase db;
     private String type;
+    private TextView filterAlert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +88,7 @@ public class WordsListActivity extends AppCompatActivity {
             filteredWords = db.query("dictionary", null, "language = ?", new String[]{selectedLanguage}, null, null, null, null);
 
         // show user alert msg when there are no words of selected language
-        TextView filterAlert = findViewById(R.id.filter_alert_text);
+        filterAlert = findViewById(R.id.alert_text);
 
         if (filteredWords.getCount() == 0) {
             filterAlert.setText("no words found in " + selectedLanguage + " to filter");
@@ -98,5 +99,9 @@ public class WordsListActivity extends AppCompatActivity {
         DictionaryAdapter dcAdapter = new DictionaryAdapter(this, filteredWords, type);
         ListView listView = findViewById(R.id.words_list);
         listView.setAdapter(dcAdapter);
+    }
+
+    public void Search(View view) {
+
     }
 }
