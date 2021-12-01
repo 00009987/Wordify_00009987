@@ -2,18 +2,23 @@ package com.example.wordify_00009987;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class WordsListActivity extends AppCompatActivity {
     private final String[] options = new String[]{"spanish", "japanese", "german", "russian"};
+    private SQLiteDatabase db;
+    private String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,28 +32,29 @@ public class WordsListActivity extends AppCompatActivity {
     private void onWordListStart() {
         // connect to db
         DictionaryDbManager dbManager = new DictionaryDbManager(this);
-        SQLiteDatabase db = dbManager.getReadableDatabase();
+        db = dbManager.getReadableDatabase();
         Cursor dictionary = null;
 
         // get type of the word list
         Intent i = getIntent();
-        String type = i.getStringExtra("type");
+        type = i.getStringExtra("type");
 
-        if (type.equals("words")) {
-            setTitle("all words");
-
-            // get all the words from db
-            dictionary = db.query("dictionary", null, null, null, null, null, null);
-        } else if (type.equals("favorites")) {
-            setTitle("favorites");
-
-            // get all favorites
-            dictionary = db.query("dictionary", null, "isFavorite = 1", null, null, null, null);
-        } else if (type.equals("archives")) {
-            setTitle("archives");
-
-            // get all favorites
-            dictionary = db.query("dictionary", null, "isArchived = 1", null, null, null, null);
+        switch (type) {
+            case "words":
+                setTitle("all words");
+                // get all the words from db
+                dictionary = db.query("dictionary", null, null, null, null, null, null);
+                break;
+            case "favorites":
+                setTitle("favorites");
+                // get all favorites
+                dictionary = db.query("dictionary", null, "isFavorite = 1", null, null, null, null);
+                break;
+            case "archives":
+                setTitle("archives");
+                // get all favorites
+                dictionary = db.query("dictionary", null, "isArchived = 1", null, null, null, null);
+                break;
         }
 
         // display words in listview
@@ -65,9 +71,26 @@ public class WordsListActivity extends AppCompatActivity {
         dropdown.setAdapter(adapter);
     }
 
+    @SuppressLint({"Recycle", "SetTextI18n"})
     public void filterByLanguage(View view) {
+        // get filtering word
         Spinner filterSpinner = findViewById(R.id.filter_spinner);
         String selectedLanguage = filterSpinner.getSelectedItem().toString();
-        Log.d("language", selectedLanguage);
+
+        // get filtered words from db
+        Cursor filteredWords = db.query("dictionary", null, "language = ?", new String[]{selectedLanguage}, null, null, null, null);
+
+        // show user alert msg when there are no words of selected language
+        TextView filterAlert = findViewById(R.id.filter_alert_text);
+
+        if(filteredWords.getCount() == 0) {
+            filterAlert.setText("you don't have any " + selectedLanguage + " words yet");
+        } else {
+            filterAlert.setText("");
+        }
+        // display words in listview
+        DictionaryAdapter dcAdapter = new DictionaryAdapter(this, filteredWords, type);
+        ListView listView = findViewById(R.id.words_list);
+        listView.setAdapter(dcAdapter);
     }
 }
