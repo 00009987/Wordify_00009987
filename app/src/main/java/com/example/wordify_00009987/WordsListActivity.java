@@ -1,5 +1,6 @@
 package com.example.wordify_00009987;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -9,8 +10,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -19,15 +20,46 @@ public class WordsListActivity extends AppCompatActivity {
     private final String[] options = new String[]{"spanish", "japanese", "german", "russian"};
     private SQLiteDatabase db;
     private String type;
-    private TextView filterAlert;
+    private TextView alertTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_words_list);
 
+        // get alert text for warnings
+        alertTextView = findViewById(R.id.alert_text);
+
         onWordListStart();
         generateSpinnerOptions();
+    }
+
+    private void generateSpinnerOptions() {
+        Spinner dropdown = findViewById(R.id.filter_spinner);
+
+        // basic adapter to describe how the items are displayed
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_style, options);
+        dropdown.setAdapter(adapter);
+    }
+
+    private void renderListView(Cursor words) {
+        // display words in listview
+        DictionaryAdapter dcAdapter = new DictionaryAdapter(this, words, type);
+        ListView listView = findViewById(R.id.words_list);
+        listView.setAdapter(dcAdapter);
+    }
+
+    private Cursor getWords(String command) {
+        return db.query("dictionary", null, command, null, null, null, null);
+    }
+
+    private void showAlertMsg(@NonNull Cursor data, String msg) {
+        // show corresponding alert msg when there are no data
+        if (data.getCount() == 0) {
+            alertTextView.setText(msg);
+        } else {
+            alertTextView.setText("");
+        }
     }
 
     private void onWordListStart() {
@@ -40,39 +72,25 @@ public class WordsListActivity extends AppCompatActivity {
         Intent i = getIntent();
         type = i.getStringExtra("type");
 
+        // get words and set title according to their type
         switch (type) {
             case "words":
                 setTitle("all words");
-                // get all the words from db
-                dictionary = db.query("dictionary", null, null, null, null, null, null);
+                dictionary = getWords(null);
                 break;
             case "favorites":
                 setTitle("favorites");
-                // get all favorites
-                dictionary = db.query("dictionary", null, "isFavorite = 1", null, null, null, null);
+                dictionary = getWords("isFavorite = 1");
                 break;
             case "archives":
                 setTitle("archives");
-                // get all favorites
-                dictionary = db.query("dictionary", null, "isArchived = 1", null, null, null, null);
+                dictionary = getWords("isArchived = 1");
                 break;
         }
 
-        // display words in listview
-        DictionaryAdapter dcAdapter = new DictionaryAdapter(this, dictionary, type);
-        ListView listView = findViewById(R.id.words_list);
-        listView.setAdapter(dcAdapter);
+        renderListView(dictionary);
     }
 
-    public void generateSpinnerOptions() {
-        Spinner dropdown = findViewById(R.id.filter_spinner);
-
-        // basic adapter to describe how the items are displayed
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_style, options);
-        dropdown.setAdapter(adapter);
-    }
-
-    @SuppressLint({"Recycle", "SetTextI18n"})
     public void filterByLanguage(View view) {
         // get filtering word
         Spinner filterSpinner = findViewById(R.id.filter_spinner);
@@ -81,27 +99,33 @@ public class WordsListActivity extends AppCompatActivity {
 
         // get filtered words from db according to the type
         if (type.equals("favorites"))
-            filteredWords = db.query("dictionary", null, "language = ? and isFavorite = 1", new String[]{selectedLanguage}, null, null, null, null);
+            filteredWords = getWords("(language like '%" + selectedLanguage + "%' and isFavorite = 1)");
         else if (type.equals("archives"))
-            filteredWords = db.query("dictionary", null, "language = ? and isArchived = 1", new String[]{selectedLanguage}, null, null, null, null);
+            filteredWords = getWords("language like '%" + selectedLanguage + "%' and isArchived = 1");
         else
-            filteredWords = db.query("dictionary", null, "language = ?", new String[]{selectedLanguage}, null, null, null, null);
+            filteredWords = getWords("language like '%" + selectedLanguage + "%'");
 
-        // show user alert msg when there are no words of selected language
-        filterAlert = findViewById(R.id.alert_text);
+        showAlertMsg(filteredWords, "no words found in " + selectedLanguage + " to filter");
 
-        if (filteredWords.getCount() == 0) {
-            filterAlert.setText("no words found in " + selectedLanguage + " to filter");
-        } else {
-            filterAlert.setText("");
-        }
-        // display words in listview
-        DictionaryAdapter dcAdapter = new DictionaryAdapter(this, filteredWords, type);
-        ListView listView = findViewById(R.id.words_list);
-        listView.setAdapter(dcAdapter);
+        renderListView(filteredWords);
     }
 
-    public void Search(View view) {
+    public void search(View view) {
+        // get user input
+        EditText searchInput = findViewById(R.id.search_input);
+        String searchedWord = searchInput.getText().toString();
+        Cursor searchedWords = null;
 
+        // get searched words according to type
+        if (type.equals("favorites"))
+            searchedWords = getWords("(originalWord like '%" + searchedWord + "%' or translation like '%" + searchedWord + "%') and isFavorite = 1");
+        else if (type.equals("archives"))
+            searchedWords = getWords("(originalWord like '%" + searchedWord + "%' or translation like '%" + searchedWord + "%') and isArchived = 1");
+        else
+            searchedWords = getWords("originalWord like '%" + searchedWord + "%' or translation like '%" + searchedWord + "%'");
+
+        showAlertMsg(searchedWords, "there are no words for " + searchedWord);
+
+        renderListView(searchedWords);
     }
 }

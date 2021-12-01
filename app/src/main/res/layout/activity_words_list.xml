@@ -11,6 +11,7 @@
         android:layout_marginTop="8dp">
 
         <EditText
+            android:id="@+id/search_input"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_marginVertical="10dp"
@@ -27,6 +28,7 @@
             android:textSize="14sp" />
 
         <Button
+            android:onClick="search"
             android:layout_width="fill_parent"
             android:layout_height="55dp"
             android:layout_gravity="center"
@@ -36,7 +38,6 @@
             android:backgroundTint="@color/primaryColor"
             android:elevation="4dp"
             android:fontFamily="@font/poppins_regular"
-            android:onClick="filterByLanguage"
             android:padding="8dp"
             android:text="@string/search"
             android:textAllCaps="false"
