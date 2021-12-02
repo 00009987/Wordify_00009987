@@ -110,9 +110,7 @@ public class NewWordActivity extends AppCompatActivity {
                         db.update("dictionary", values, "_id = ?", new String[]{String.valueOf(wordId)});
                         Toast.makeText(NewWordActivity.this, "the word is successfully updated", Toast.LENGTH_LONG).show();
 
-                        // open main activity
-                        Intent mainActivity = new Intent(NewWordActivity.this, MainActivity.class);
-                        startActivity(mainActivity);
+                        finish();
                     }
                 }
             }

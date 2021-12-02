@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/whiteBackground"
@@ -21,14 +22,15 @@
             android:background="@drawable/card_container"
             android:elevation="2dp"
             android:fontFamily="@font/poppins_regular"
+            android:gravity="left|center_vertical"
             android:hint="@string/type_your_search"
             android:padding="8dp"
             android:textColor="@color/primaryColor"
             android:textColorHint="@color/darkGrey"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            tools:ignore="RtlHardcoded" />
 
         <Button
-            android:onClick="search"
             android:layout_width="fill_parent"
             android:layout_height="55dp"
             android:layout_gravity="center"
@@ -38,8 +40,10 @@
             android:backgroundTint="@color/primaryColor"
             android:elevation="4dp"
             android:fontFamily="@font/poppins_regular"
+            android:onClick="search"
             android:padding="8dp"
             android:text="@string/search"
+            android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/white" />
 
@@ -61,7 +65,9 @@
             android:background="@drawable/spinner_style"
             android:elevation="2dp"
             android:padding="0sp"
-            android:spinnerMode="dropdown" />
+            android:spinnerMode="dropdown"
+            android:textAlignment="center"
+            />
 
         <Button
             android:layout_width="fill_parent"
@@ -76,6 +82,7 @@
             android:onClick="filterByLanguage"
             android:padding="8dp"
             android:text="@string/filter"
+            android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/white" />
     </LinearLayout>
