@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -15,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class WordsListActivity extends AppCompatActivity {
     private final String[] options = new String[]{"spanish", "japanese", "german", "russian"};
@@ -114,18 +116,26 @@ public class WordsListActivity extends AppCompatActivity {
         // get user input
         EditText searchInput = findViewById(R.id.search_input);
         String searchedWord = searchInput.getText().toString();
-        Cursor searchedWords = null;
 
-        // get searched words according to type
-        if (type.equals("favorites"))
-            searchedWords = getWords("(originalWord like '%" + searchedWord + "%' or translation like '%" + searchedWord + "%') and isFavorite = 1");
-        else if (type.equals("archives"))
-            searchedWords = getWords("(originalWord like '%" + searchedWord + "%' or translation like '%" + searchedWord + "%') and isArchived = 1");
-        else
-            searchedWords = getWords("originalWord like '%" + searchedWord + "%' or translation like '%" + searchedWord + "%'");
+        // validate user input
+        if (searchedWord.isEmpty())
+            Toast.makeText(this, "search input cannot be empty", Toast.LENGTH_SHORT).show();
+        else if (TextUtils.isDigitsOnly(searchedWord))
+            Toast.makeText(this, "search input cannot be numbers", Toast.LENGTH_SHORT).show();
+        else {
+            Cursor searchedWords = null;
 
-        showAlertMsg(searchedWords, "there are no words for " + searchedWord);
+            // get searched words according to type
+            if (type.equals("favorites"))
+                searchedWords = getWords("(originalWord like '%" + searchedWord + "%' or translation like '%" + searchedWord + "%') and isFavorite = 1");
+            else if (type.equals("archives"))
+                searchedWords = getWords("(originalWord like '%" + searchedWord + "%' or translation like '%" + searchedWord + "%') and isArchived = 1");
+            else
+                searchedWords = getWords("originalWord like '%" + searchedWord + "%' or translation like '%" + searchedWord + "%'");
 
-        renderListView(searchedWords);
+            showAlertMsg(searchedWords, "there are no words for " + searchedWord);
+
+            renderListView(searchedWords);
+        }
     }
 }

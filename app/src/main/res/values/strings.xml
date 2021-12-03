@@ -26,4 +26,8 @@
     <string name="filter">filter</string>
     <string name="type_your_search">type your search...</string>
     <string name="search">search</string>
+    <string name="username">username</string>
+    <string name="bio">bio</string>
+    <string name="info">info</string>
+    <string name="about_the_developer_from_a_github_api">about the developer (from a github api)</string>
 </resources>
